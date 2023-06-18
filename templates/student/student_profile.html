@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Student Profile</title>
+    <!-- Include Bootstrap CSS file -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <!-- Custom CSS -->
+    <style>
+        body {
+            background-image: url("{{ url_for('static', filename='student.jpg') }}");
+            background-size: cover;
+            background-position: center;
+            color: #000;
+            font-weight: bold;
+        }
+        
+        .profile-logo {
+            width: 100px;
+            height: 100px;
+            margin-bottom: 20px;
+        }
+        
+        .profile-box {
+            background-color: rgb(239 217 177 / 80%);
+            max-width: 400px;
+            /* Add transparency to the background color */
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 100px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+            width: 30%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .logout-btn {
+            margin-top: 20px;
+        }
+        /* Add a pseudo-element for the blurred background */
+        
+        .list-group {
+            position: relative;
+            display: block;
+            padding: 0;
+            margin-bottom: -1px;
+            /* background-color: #fff; */
+            /* Remove the white background color */
+            border: none;
+            /* Remove the border */
+        }
+        
+        .list-group-item {
+            background-color: rgba(255, 255, 255, 0.8);
+            /* Add transparency to the background color */
+            border: none;
+            padding: 0.75rem -2.75rem;
+            /* Remove the border */
+            color: #000;
+            /* Set the text color */
+            font-weight: bold;
+        }
+        
+        .list-group-item:last-child {
+            border-bottom: none;
+            /* Remove the bottom border for the last list item */
+        }
+        
+        body::before {
+            content: "";
+            background-image: url("{{ url_for('static', filename='student.jpg') }}");
+            background-size: cover;
+            background-position: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            filter: blur(5px);
+            /* Apply blur effect to the background */
+            z-index: -1;
+            /* Send the pseudo-element behind other elements */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 text-center profile-box">
+                <img src="{{ url_for('static', filename='logo.png') }}" alt="Profile Logo" class="profile-logo">
+                <h2>{{ current_user.name }}'s Profile</h2>
+                <p>General Information</p>
+                <hr>
+                <div class="row">
+                    <div class="col-md-6 offset-md-3">
+                        <ul class="list-group">
+                            <li class="list-group-item">Name: {{ current_user.name }}</li>
+                            <li class="list-group-item">Address: {{ current_user.address }}</li>
+                            <li class="list-group-item">Email: {{ current_user.email }}</li>
+                        </ul>
+                    </div>
+                </div>
+                <a href="{{ url_for('logout') }}" class="btn btn-primary logout-btn">Logout</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Include Bootstrap JS file -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</body>
+
+</html>
